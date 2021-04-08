@@ -2,7 +2,7 @@
 Sávio Rodrigues
 ---
 # Introdução
-Atividade da diciplina de Algoritmo e Estrutura de Dados II tem como objetivo aplicar grafos com matriz de adjacência e matriz de incidência e a busca de dados. Para tanto, utilizou-se como ponto de partida o código produzido durante as aulas sobre lista de Adjacências. A discussão proposta dessa documentação é apresentar a diferença 
+Atividade da diciplina de Algoritmo e Estrutura de Dados II tem como objetivo aplicar grafos com matriz de adjacência e matriz de incidência e a busca de dados. Para tanto, utilizou-se como ponto de partida o código produzido durante as aulas sobre lista de Adjacências. A discussão proposta dessa documentação é apresentar a diferença de tais códigos e o seu custo referente ao tempo de execução e memória utilizada.
 
 # Apresentação
 A teoria dos grafos ( ramo da matemática que estuda as relações entre os objetos de um determinado conjunto) é um assunto antigo, porém com várias aplicações no nosso dia-a-dia. No século XVIII o matématico suiço Leonard Euler utilizou os grafos para resolver o problemas que conhecemos como __As Sete pontes de königsberg__. 
@@ -62,7 +62,7 @@ Graph GraphInitialize(int V){
 	return G;
 }
 ```
-``GraphInsertEdge()`` tem a função de inserir na matriz as Arestas adicionadas atribuindo 1 relancionando vertices na linha/coluna.
+``GraphInsertEdge()`` tem a função de inserir na matriz as Arestas adicionadas atribuindo 1 relacionando vértices pela linha e coluna.
 
 ```C
 void GraphInsertEdge(Graph G, int v1, int v2){
@@ -72,7 +72,7 @@ void GraphInsertEdge(Graph G, int v1, int v2){
 	}
 }
 ```
-Por fim a função ``ImprimeMatriz()`` e ``ImprimeGraph()``, mostra a matriz das relações dos vértices do grafo. Assim como mostra a imagem anexada em que foi utilizado o exemplo do slide 9/ aula 11.
+Por fim a função ``ImprimeMatriz()`` e ``ImprimeGraph()``, mostra a matriz das relações dos vértices do grafo. Assim como mostra a imagem anexada ilustrando a compilação do grafo utilizado no slide 9/ aula 11.
 ```C
 void ImprimeMatriz(Graph G){
 	printf("\t --MATRIZ DE ADJACÊNCIA--\n");
@@ -109,6 +109,51 @@ void ImprimeGraph(Graph G){
 </p>
 
 ## Busca
+### DFS
+O algoritmo de busca BFS em matriz de adjacência se difere da lista de adjacência dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurado o valor 1, ou seja, das arestas que incidem do vértice analisado.
+```C
+void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
+	cor[v]  = 1;
+	*tempo        += 1;
+	d[v]    = *tempo;
+
+	for(int i = 0; i<G->V ; i++)
+		if(G->adj[v][i]->value == 1 && cor[i] == 0)
+			DFS_VISIT(G, i, cor, d, f, tempo);
+
+	cor[v] = 2;
+	*tempo += 1;
+	f[v] = *tempo;
+	printf("    Vertex:%d D:%d, F:%d \n", v, d[v], f[v]);
+}
+```
+<p align="center">
+    <img src="Imagens/CompDFSMatrizAdj.png">
+</p>
+
+### BFS
+O algoritmo de busca BFS em matriz de adjacência se difere da lista de adjacência dentro do ``while``. O novo código percorre a linha da matriz e enfileira o valor encontrado.
+```C
+while (f->size > 0){
+	Item *u = Dequeue(f);
+	for(int i =0; i< G->V; i++){
+		if(G->adj[u->data][i]->value == 1 && cor[i]== 0){
+			cor[i]= 1;
+			d[i] = d[u->data] + 1;
+			pi[i] = u->data;
+			Queue(f, i);
+		}
+	}
+	cor[u->data] = 2;
+	printf("Vertex:%d\n", u->data);		
+}
+```
+<p align="center">
+    <img src="Imagens/CompBFSMatrizAdj.png">
+</p>
+A compilação mostra que o algoritmo consegue chegar em todos os pontos pelo grafo teste apresentado.
+<br></br>
+
 
 ## Matriz de Incidência
 Semelhante à matriz de adjacência, a de incidência possui uma representação de grafo através de uma matriz bidimencional. Porém uma das dimensões são os vértices a outra são as arestas, ou seja uma matriz _V x E_. Portanto possui os seguintes atributos:
@@ -191,6 +236,8 @@ A compilação, mostra que foram criados 8 vértices e 20 arestas indicando a in
 <br></br>
 
 ## Busca
+### DFS
+### BFS
 
 # Consumo de memória e tempo de execução
 
