@@ -4,6 +4,9 @@
 typedef struct graph *Graph;
 typedef struct TipoVertex *Vertex;
 
+typedef struct TipoItem Item;
+typedef struct TipoFila Fila;
+
 struct TipoVertex{
 	int value;
 };
@@ -13,6 +16,60 @@ struct graph{
 	int E;
 	Vertex **adj;
 };
+
+//============================FILA===================================//
+struct TipoItem{
+    int data;
+	Item *prox;
+};
+
+struct TipoFila{
+	Item *head;
+	Item *tail;
+	int size;
+};
+
+//// procs FILA
+
+Fila* FFVazia(){
+	Fila *f = (Fila*) malloc(sizeof(Fila));
+	f->head = NULL;
+	f->tail = NULL;
+	return f;
+}
+
+void Queue(Fila *f, int vertex){
+	Item *d = (Item *) malloc (sizeof(Item));
+	d->data = vertex;
+	d->prox = NULL;
+
+	if(f->head == NULL){
+		f->head = d;
+		f->tail = d;
+	}else{
+		f->tail->prox = d;
+		f->tail = d;
+	}
+
+	f->size ++;
+}
+
+Item* Dequeue(Fila *f){
+	Item *aux;
+
+	if(f->head == NULL)
+		return NULL;
+
+	aux = f->head;
+	f->head = f->head->prox;
+	f->size --;
+
+	return aux;
+}
+
+//===============================================================//
+
+
 
 Vertex VertexInitialize(int value){
 	Vertex v = (Vertex )malloc (sizeof(Vertex));

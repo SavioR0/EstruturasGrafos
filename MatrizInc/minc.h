@@ -61,8 +61,5 @@ void ImprimeMatriz(Graph G){
 	printf("\n");
 }
 
-void ImprimeGraph(){
-
-}
 
 #endif
