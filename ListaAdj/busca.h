@@ -14,7 +14,7 @@ void DFS_VISIT(Graph G, Vertex v, int *cor, int *d, int *f, int *tempo){
 	cor[v->value] = 2;
 	*tempo += 1;
 	f[v->value] = *tempo;
-	printf("Vertex:%d D:%d, F:%d \n", v->value, d[v->value], f[v->value]);
+	printf("Vertex:%d D:%d, F:%d   ", v->value, d[v->value], f[v->value]);
 }
 
 void DFS(Graph G){
@@ -62,7 +62,7 @@ void BFS(Graph G, Vertex s){
 		}
 
 		cor[u->data] = 2;
-		printf("Vertex:%d\n", u->data);
+		printf("Vertex:%d  ", u->data);
 	}
 }
 

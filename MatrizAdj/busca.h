@@ -14,7 +14,7 @@ void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
 	cor[v] = 2;
 	*tempo += 1;
 	f[v] = *tempo;
-	printf("    Vertex:%d D:%d, F:%d \n", v, d[v], f[v]);
+	printf("Vertex:%d D:%d, F:%d\t\t", v, d[v], f[v]);
 }
 
 void DFS(Graph G){
@@ -24,7 +24,7 @@ void DFS(Graph G){
 	int tempo = 0;
 	for(int v=0; v<G->V; v++)
 		cor[v] = 0;
-	printf("\t=======DFS======\n");
+	printf("\n\t=======DFS======\n");
 	for(int v=0; v<G->V; v++)
 		if(cor[v] == 0)
 			DFS_VISIT(G, v, cor, d, f, &tempo);
@@ -50,7 +50,7 @@ void BFS(Graph G, Vertex s){
 	pi[s->value]  = -1;
 
 	Queue(f, s->value);
-	printf("\t=======BFS======\n");
+	printf("\n\n\t=======BFS======\n");
 	while (f->size > 0){
 		Item *u = Dequeue(f);
 
@@ -64,7 +64,7 @@ void BFS(Graph G, Vertex s){
 		}
 
 		cor[u->data] = 2;
-		printf("    Vertex:%d\n", u->data);		
+		printf("Vertex:%d\t\t", u->data);		
 	}
 }
 //===========================================================
