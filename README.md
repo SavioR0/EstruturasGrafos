@@ -3,6 +3,10 @@ Sávio Rodrigues
 ---
 # Introdução
 Atividade da diciplina de Algoritmo e Estrutura de Dados II tem como objetivo aplicar grafos com matriz de adjacência, matriz de incidência e busca de dados (BFS e DFS). Para tanto, utilizou-se como ponto de partida o código produzido durante as aulas sobre lista de Adjacências. A discussão proposta dessa documentação é apresentar a diferença de tais códigos e o seu custo referente ao tempo de execução e memória utilizada.
+# Compilação
+A compilação é realizada pelo compilador gcc com a seguinte linha de comando nas três representações de grafos:
+    
+	g++ Main.c -o Main
 
 # Apresentação
 A teoria dos grafos ( ramo da matemática que estuda as relações entre os objetos de um determinado conjunto) é um assunto antigo, porém com várias aplicações no nosso dia-a-dia. No século XVIII o matématico suiço Leonard Euler utilizou os grafos para resolver o problemas que conhecemos como __As Sete pontes de königsberg__. 
@@ -294,7 +298,7 @@ A atividade proposta tem como objetivo duas execuções dos grafos com 100 vért
 
 Os grafos esparsos foram executados com um total de 100 vértices (V) e 101 arestas (mesma ordem de V), cujo objetivo é garantir a não formação de subgrafos desconexos. Em adição, nos grafos densos, também com 100 vértices, foram adicionadas aproximadamente 10.000 (ordem V²) novas arestas aleatórias. 
 
-Para coletar dados do consumo de memória ultilizado, usou-se o programa __valgrid__ que compila o executável mostrando a quantidade de memória utilizada. O tempo de execução foi coletado a partir da biblioteca `time.h`. Por fim foram comentados as impressoes das matrizes para que não prejudique o resultado final da matriz de incidência que tem um número considerável de colunas. 
+Para coletar dados do consumo de memória ultilizado, usou-se o programa __valgrid__ com a opção `--leak-check=full` que compila o executável mostrando a quantidade de memória utilizada. O tempo de execução foi coletado a partir da biblioteca `time.h`. Por fim foram comentados as impressoes das matrizes para que não prejudique o resultado final da matriz de incidência que tem um número considerável de colunas. 
  
 
 ## Lista de Adjacência
