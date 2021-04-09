@@ -32,7 +32,8 @@ int main(){
 	GraphInsertEdge(G, 7, 5);
 	
 	ImprimeMatriz(G);
-	//ImprimeGraph(G);
+	BFS(G, G->adj[0][0]);
+	DFS(G);
 
 	return 0;
 }

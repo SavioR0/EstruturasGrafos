@@ -110,7 +110,7 @@ void ImprimeGraph(Graph G){
 
 ## Busca
 ### DFS
-O algoritmo de busca BFS em matriz de adjacência se difere da lista de adjacência dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurado o valor 1, ou seja, das arestas que incidem do vértice analisado.
+O algoritmo de busca DFS em matriz de adjacência se difere da lista de adjacência dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurando o valor 1.
 ```C
 void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
 	cor[v]  = 1;
@@ -148,6 +148,7 @@ while (f->size > 0){
 	printf("Vertex:%d\n", u->data);		
 }
 ```
+#### Compilação:
 <p align="center">
     <img src="Imagens/CompBFSMatrizAdj.png">
 </p>
@@ -237,7 +238,55 @@ A compilação, mostra que foram criados 8 vértices e 20 arestas indicando a in
 
 ## Busca
 ### DFS
+O algoritmo de busca DFS em matriz de Incidẽncia se difere da lista de adjacência dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurado o valor 1, ou seja, das arestas que incidem do vértice analisado, e depois busca pelo valor -1.
+```C
+void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
+	cor[v]  = 1;
+	*tempo  += 1;
+	d[v]    = *tempo;
+
+    for(int i = 0; i<G->E ; i++)
+        if(G->adj[v][i]->value == 1)
+            for(int j = 0; j<G->V; j++)
+                if(G->adj[j][i]->value == 1 && cor[j] == 0)
+                    DFS_VISIT(G, j, cor, d, f, tempo);
+
+	cor[v] = 2;
+	*tempo += 1;
+	f[v] = *tempo;
+	printf("    Vertex:%d D:%d, F:%d \n", v, d[v], f[v]);
+}
+```
+#### Compilação:
+<p align="center">
+    <img src="Imagens/CompDFSMatrizInc.png">
+</p>
+
 ### BFS
+A alteração na função se deu dentro do laço `while`. Diferente da estrutura BFS na matriz de adjacência, a de incidência necessita de dois laços de repetição. O primeiro laço busca o vértice de incidência através das arestas, representados por 1, e o outro busca o vértice de destino na mesma coluna, representado por -1 na matriz.
+```C
+while (f->size > 0){
+		Item *u = Dequeue(f);
+
+		for(int i =0; i< G->E; i++){
+			if(G->adj[u->data][i]->value == 1)
+                for(int v=0; v<G->V; ++v)    
+                    if(G->adj[v][i]->value == -1 && cor[v] == 0){
+                        cor[v]= 1;
+                        d[v] = d[u->data] + 1;
+                        pi[v] = u->data;
+                        Queue(f, v);
+			        }
+		}
+
+		cor[u->data] = 2;
+		printf("    Vertex:%d\n", u->data);		
+	}
+```
+#### Compilação:
+<p align="center">
+    <img src="Imagens/CompBFSMatrizInc.png">
+</p>
 
 # Consumo de memória e tempo de execução
 
