@@ -9,7 +9,7 @@
 #define EDenso EEsparso*EEsparso	//Arestas em um grafo denso, ordem de v² 
 
 int main(){
-/*========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
+///========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
 	Graph G = GraphInitialize(8,20);
 
 	//Modelo de Grafo do slide 9 / aula 11
@@ -37,9 +37,10 @@ int main(){
 	
 
 	ImprimeMatriz(G);
-	ImprimeGraph(G);
+
 	BFS(G, G->adj[0][0]);
 	DFS(G);
+	printf("\n\n");
 //==================================================*/
 
 //==========CÓDIGO PARA A COLETA DE TEMPO E MEMÓRIA UTILIZADA===========
@@ -67,7 +68,7 @@ int main(){
 	printf("\n\nTempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
 	//==============================*/
 
-	///======= GRAFO DENSO==========
+	/*//======= GRAFO DENSO==========
 
 	clock_t t;
 	t = clock();

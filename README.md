@@ -2,7 +2,7 @@
 Sávio Rodrigues
 ---
 # Introdução
-Atividade da diciplina de Algoritmo e Estrutura de Dados II tem como objetivo aplicar grafos com matriz de adjacência e matriz de incidência e a busca de dados. Para tanto, utilizou-se como ponto de partida o código produzido durante as aulas sobre lista de Adjacências. A discussão proposta dessa documentação é apresentar a diferença de tais códigos e o seu custo referente ao tempo de execução e memória utilizada.
+Atividade da diciplina de Algoritmo e Estrutura de Dados II tem como objetivo aplicar grafos com matriz de adjacência, matriz de incidência e busca de dados (BFS e DFS). Para tanto, utilizou-se como ponto de partida o código produzido durante as aulas sobre lista de Adjacências. A discussão proposta dessa documentação é apresentar a diferença de tais códigos e o seu custo referente ao tempo de execução e memória utilizada.
 
 # Apresentação
 A teoria dos grafos ( ramo da matemática que estuda as relações entre os objetos de um determinado conjunto) é um assunto antigo, porém com várias aplicações no nosso dia-a-dia. No século XVIII o matématico suiço Leonard Euler utilizou os grafos para resolver o problemas que conhecemos como __As Sete pontes de königsberg__. 
@@ -17,7 +17,7 @@ Nesse contexto existem três representações de grafos: Lista de Adjacencia, Ma
 # Adaptações nas estruturas
 
 ## Matriz de Adjacência
-Tendo como ponto de partida o código de lista de adjacência produzido durante as aulas, foram feitas algumas adaptações para que o algoritmo funcione como uma representação de matriz de Adjacência. A principal foi a substituição da variável *adj por **adj.
+Tendo como ponto de partida o código de lista de adjacência produzido durante as aulas, foram feitas algumas adaptações para que o algoritmo funcione como uma representação de matriz de Adjacência. A principal foi a substituição da variável `*adj` por `**adj`.
 
 Em literatura a Matriz de adjacência é uma representação, com todas as arestas ou arcos de um grafo em uma matriz bidimencional _V x V_.
 Portanto possui os seguintes atributos:
@@ -114,7 +114,7 @@ O algoritmo de busca DFS em matriz de adjacência se difere da lista de adjacên
 ```C
 void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
 	cor[v]  = 1;
-	*tempo        += 1;
+	*tempo  += 1;
 	d[v]    = *tempo;
 
 	for(int i = 0; i<G->V ; i++)
@@ -201,7 +201,7 @@ Graph GraphInitialize(int V, int E){
 	return G;
 }
 ```
-Diferente da matriz de adjacência, a função ``GraphInsertEdge()`` na matriz de incidência tem a função de inserir 1 quando a aresta incide do vétice (representado pela linha) e -1 no vértice destino. Ou seja, em toda coluna da matriz, têm-se o valor 1 e -1 indicando o a incidência e destido de uma aresta.
+Diferente da matriz de adjacência, a função ``GraphInsertEdge()`` na matriz de incidência tem a função de inserir 1 quando a aresta incide do vértice (representado pela linha) e -1 no vértice destino. Ou seja, em toda coluna da matriz, têm-se o valor 1 e -1 indicando o a incidência e destido de uma aresta.
 ```C
 void GraphInsertEdge(Graph G, int v1, int v2){
 	if(G->adj[v1][G->E]->value== 0){
@@ -238,7 +238,7 @@ A compilação, mostra que foram criados 8 vértices e 20 arestas indicando a in
 
 ## Busca
 ### DFS
-O algoritmo de busca DFS em matriz de Incidẽncia se difere da lista de adjacência dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurado o valor 1, ou seja, das arestas que incidem do vértice analisado, e depois busca pelo valor -1.
+O algoritmo de busca DFS em matriz de Incidência se difere das anteriores dentro da função `DFS_VISIT()`. O novo código percorre a linha da matriz procurando o valor 1, ou seja, das arestas que incidem do vértice analisado, e depois busca pelo valor -1.
 ```C
 void DFS_VISIT(Graph G, int v, int *cor, int *d, int *f, int *tempo){
 	cor[v]  = 1;
@@ -290,18 +290,85 @@ while (f->size > 0){
 
 # Consumo de memória e tempo de execução
 
-A atividade proposta tem como objetivo duas execuções de grafos com 100 vértices para a obtenção de dados palpáveis na análise dos algoritmos. Um grafo esparso e um denso para cada uma das representações.
+A atividade proposta tem como objetivo duas execuções dos grafos com 100 vértices para a obtenção de dados palpáveis na análise dos algoritmos. Um grafo esparso e um denso para cada uma das representações.
+
+Os grafos esparsos foram executados com um total de 100 vértices (V) e 101 arestas (mesma ordem de V), cujo objetivo é garantir a não formação de subgrafos desconexos. Em adição, nos grafos densos, também com 100 vértices, foram adicionadas aproximadamente 10.000 (ordem V²) novas arestas aleatórias. 
+
+Para coletar dados do consumo de memória ultilizado, usou-se o programa __valgrid__ que compila o executável mostrando a quantidade de memória utilizada. O tempo de execução foi coletado a partir da biblioteca `time.h`. Por fim foram comentados as impressoes das matrizes para que não prejudique o resultado final da matriz de incidência que tem um número considerável de colunas. 
+ 
 
 ## Lista de Adjacência
-### Grafo Esparso
-### Grafo Denso
+### -Grafo Esparso
+<p align="center">
+    <img src="Imagens/CompTempoEListaAdj.png">
+	<br>
+	<img src="Imagens/CompMemEListaAdj.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `310` chamadas do malloc(), que trabalharam com um total de `5.136 bytes` de memória total.
+
+### -Grafo Denso
+<p align="center">
+    <img src="Imagens/CompTempoDListaAdj.png">
+	<br>
+	<img src="Imagens/CompMemDListaAdj.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `6.628` chamadas do malloc(), que trabalharam com um total de `55.680 bytes` de memória total.
 
 ## Matriz de Adjacência
-### Grafo Esparso
-### Grafo Denso
+### -Grafo Esparso
+<p align="center">
+    <img src="Imagens/CompTempoEMatrizAdj.png">
+	<br>
+	<img src="Imagens/CompMemEMatrizAdj.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `10.612` chamadas do malloc(), que trabalharam com um total de `169.968 bytes` de memória total.
+
+### -Grafo Denso
+<p align="center">
+    <img src="Imagens/CompTempoDMatrizAdj.png">
+	<br>
+	<img src="Imagens/CompMemDMatrizAdj.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `10.612` chamadas do malloc(), que trabalharam com um total de `169.968 bytes` de memória total.
 
 ## Matriz de Incidência
-### Grafo Esparso
-### Grafo Denso
+### -Grafo Esparso
+<p align="center">
+    <img src="Imagens/CompTempoEMatrizInc.png">
+	<br>
+	<img src="Imagens/CompMemEMatrizInc.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `10.612` chamadas do malloc(), que trabalharam com um total de `169.968 bytes` de memória total.
+
+
+### -Grafo Denso
+<p align="center">
+    <img src="Imagens/CompTempoDMatrizInc.png">
+	<br>
+	<img src="Imagens/CompMemDMatrizInc.png">
+</p>
+
+Segundo a saída do `Valgrind`, houveram `1.051.114` chamadas do malloc(), que trabalharam com um total de `16.818.000 bytes` de memória total.
+
 
 ## Conclusão
+A fim de se produzir um Gráfico didático, os valores do consumo de memória e tempo da matriz de incidência foram divididos por 10.Portanto, a partir da coleta de dados , temos consumo de memória(Bytes) e tempo (milissegundos):
+
+<p align="center">
+    Consumo Memória
+</p>
+<p align="center">
+    <img src="Imagens/Grafico.png">
+</p>
+<p align="center">
+    Tempo de Execução
+</p>
+<p align="center">
+	<img src="Imagens/GraficoTempo.png">
+</p>
+Diante dos resultados obtidos, a lista de adjacência possui a pior das representações em termos de consumo de memória e tempo de execução. No cenário custo a representação de Grafo que saiu melhor foi a lista de Adjacência, seguida da matriz de adjacência e por fim a matriz De Incidêcia que se torna inviável para uma grande quantidade de arestas.

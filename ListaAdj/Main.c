@@ -8,7 +8,7 @@
 #define EEsparso 101	//Arestas em um grafo esparço, ordem de V
 #define EDenso 10000	//Arestas em um grafo denso, ordem de v² 
 int main(){
-	/*========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
+	///========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
 
 	Graph G = GraphInitialize(8);
 
@@ -38,12 +38,13 @@ int main(){
 	ImprimeGraph(G);
 	DFS(G);
 	BFS(G, G->adj[0]);
+	printf("\n\n");
 //==================================================*/
 
 
 //==========CÓDIGO PARA A COLETA DE TEMPO E MEMÓRIA UTILIZADA===========
 	
-	///==========GRAFO ESPARSO=======
+	/*//==========GRAFO ESPARSO=======
 
 	clock_t t;
 	t = clock();
@@ -56,12 +57,12 @@ int main(){
 	}
 	GraphInsertEdge(G, G->adj[EEsparso], G->adj[0]);
 
-	ImprimeGraph(G);
+	//ImprimeGraph(G);
 	DFS(G);
 	BFS(G, G->adj[0]);
 	//Imprime tempo
 	t = clock() - t; //Tempo final menos inicial
-	printf("Tempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
+	printf("\n\nTempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
 	//==============================*/
 
 	/*//======= GRAFO DENSO==========
@@ -83,12 +84,12 @@ int main(){
 		GraphInsertEdge(G, G->adj[(rand() % 101)], G->adj[(rand() % 101)]);
 	
 	
-	ImprimeGraph(G);
+	//ImprimeGraph(G);
 	DFS(G);
 	BFS(G, G->adj[0]);
 	//Imprime tempo
 	t = clock() - t;
-	printf("Tempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
+	printf("\n\nTempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
 	//===============================*/
 //======================================================================
 	return 0;

@@ -9,7 +9,7 @@
 #define EDenso 10000	//Arestas em um grafo denso, ordem de v² 
 
 int main(){
-/*========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
+///========== TESTE USADO NA DOCUMENTAÇÃO DO CÓDIGO ===========
 	Graph G = GraphInitialize(8);
 
 	//Modelo de Grafo do slide 9 / aula 11
@@ -40,6 +40,7 @@ int main(){
 	ImprimeGraph(G);
 	BFS(G, G->adj[0][0]);
 	DFS(G);
+	printf("\n\n");
 //==================================================*/
 
 //==========CÓDIGO PARA A COLETA DE TEMPO E MEMÓRIA UTILIZADA===========
@@ -57,8 +58,8 @@ int main(){
 	}
 	GraphInsertEdge(G, EEsparso, 0);
 
-	ImprimeMatriz(G);
-	ImprimeGraph(G);
+	//ImprimeMatriz(G);
+	//ImprimeGraph(G);
 	DFS(G);
 	BFS(G, G->adj[0][0]);
 
@@ -67,7 +68,7 @@ int main(){
 	printf("\n\nTempo de execução: %lf milissegundos\n", ((double)t)/((CLOCKS_PER_SEC/1000)));// Tempo em milisegundos
 	//==============================*/
 
-	///======= GRAFO DENSO==========
+	/*//======= GRAFO DENSO==========
 
 	clock_t t;
 	t = clock();
@@ -85,8 +86,8 @@ int main(){
 	for (int i = 0; i < EDenso; i++)
 		GraphInsertEdge(G, (rand() % 101), (rand() % 101));
 	
-	ImprimeMatriz(G);
-	ImprimeGraph(G);
+	//ImprimeMatriz(G);
+	//ImprimeGraph(G);
 	DFS(G);
 	BFS(G, G->adj[0][0]);
 	//Imprime tempo
